@@ -4,7 +4,10 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WordleGame {
 
@@ -62,22 +65,53 @@ public class WordleGame {
 
     // 정답 체크 메서드
     public WordleBlock[] checkAnswer(String inputKeyword) {
-        // keyword 가 정답인지 체크 후 맞는 문자열 반환
-        WordleBlock[] result = new WordleBlock[5];
-
         String answerKeyword = getAnswerKeyword();
 
-        // TODO : 정답 체크 후 결과 박스 만들기
+        WordleBlock[] result = compareKeywords(inputKeyword, answerKeyword);
 
         return result;
     }
 
+    private WordleBlock[] compareKeywords(String inputKeyword, String answerKeyword) {
+        WordleBlock[] result = new WordleBlock[5];
+
+        Set<Character> inputKeywordLetters = inputKeyword.chars()
+            .mapToObj(c -> (char)c)
+            .collect(Collectors.toCollection(HashSet::new));
+
+        for (int index = 0; index < inputKeyword.length(); index++) {
+            char inputKeywordLetter = inputKeyword.charAt(index);
+            char answerKeywordLetter = answerKeyword.charAt(index);
+
+            WordleBlock block = compareLetters(inputKeywordLetter, answerKeywordLetter, inputKeywordLetters);
+
+            result[index] = block;
+        }
+
+        return result;
+    }
+
+    private WordleBlock compareLetters(char inputKeywordLetter, char answerKeywordLetter, Set<Character> inputKeywordLetters) {
+        // 1. 두 단어가 일치하는지
+        if (answerKeywordLetter == inputKeywordLetter) {
+            return WordleBlock.CORRECT;
+        }
+
+        // 2. 다른 위치에 있는 단어인지
+        if (inputKeywordLetters.contains(answerKeywordLetter)) {
+            return WordleBlock.EXIST_BUT_WRONG_SPOT;
+        }
+
+        // 3. 틀림
+        return WordleBlock.WRONG;
+    }
 
     public String getAnswerKeyword() {
         List<String> keywords = readKeywordsFromFile();
 
         int index = findAnswerKeywordIndex(keywords);
 
+        // 키워드가 null이라면 논리적 예외 발생 시켜주면 좋을 듯 함
         return keywords.get(index);
     }
 
