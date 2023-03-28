@@ -15,22 +15,20 @@ public class WordleGame {
     public static final int TOTAL_CHANCE = 6;
     public static final int KEYWORD_LENGTH = 5;
 
-    private final String answerKeyword;
     private final Coin coin;
 
-    private final LocalDate referenceDate = LocalDate.of(2021, 6, 19);
-    private final LocalDate currentDate;
+    private final LocalDate standardDate = LocalDate.of(2021, 6, 19);
+    private final LocalDate comparisonDate;
 
-    public WordleGame(String answerKeyword, Coin coin, LocalDate currentDate) {
-        this.answerKeyword = answerKeyword;
+    // TODO: LocalDate.now() 좀 더 좋은 테스트 방법 생각해보기
+    public WordleGame(Coin coin, LocalDate comparisonDate) {
         this.coin = coin;
-        this.currentDate = currentDate;
+        this.comparisonDate = comparisonDate;
     }
 
-    public WordleGame(String answerKeyword, Coin coin) {
-        this.answerKeyword = answerKeyword;
+    public WordleGame(Coin coin) {
         this.coin = coin;
-        this.currentDate = LocalDate.now();
+        this.comparisonDate = LocalDate.now();
     }
 
     public int getRestChance() {
@@ -73,7 +71,7 @@ public class WordleGame {
     private WordleBlock[] compareKeywords(String inputKeyword, String answerKeyword) {
         WordleBlock[] resultBlocks = new WordleBlock[KEYWORD_LENGTH];
 
-        Set<Character> inputLetters = inputKeyword.chars()
+        Set<Character> answerLetters = answerKeyword.chars()
             .mapToObj(letter -> (char)letter)
             .collect(Collectors.toCollection(HashSet::new));
 
@@ -81,7 +79,7 @@ public class WordleGame {
             char inputLetter = inputKeyword.charAt(index);
             char answerLetter = answerKeyword.charAt(index);
 
-            WordleBlock block = compareLetters(inputLetter, answerLetter, inputLetters);
+            WordleBlock block = compareLetters(inputLetter, answerLetter, answerLetters);
 
             resultBlocks[index] = block;
         }
@@ -89,12 +87,12 @@ public class WordleGame {
         return resultBlocks;
     }
 
-    private WordleBlock compareLetters(char inputLetter, char answerLetter, Set<Character> inputLetters) {
+    private WordleBlock compareLetters(char inputLetter, char answerLetter, Set<Character> answerLetters) {
         if (answerLetter == inputLetter) {
             return WordleBlock.CORRECT;
         }
 
-        if (inputLetters.contains(answerLetter)) {
+        if (answerLetters.contains(inputLetter)) {
             return WordleBlock.EXIST_BUT_WRONG_SPOT;
         }
 
@@ -116,7 +114,7 @@ public class WordleGame {
     }
 
     private int findAnswerKeywordIndex(List<String> keywords) {
-        Period period = Period.between(referenceDate, currentDate);
+        Period period = Period.between(standardDate, comparisonDate);
 
         return (period.getDays() % keywords.size()) - 1;
     }
