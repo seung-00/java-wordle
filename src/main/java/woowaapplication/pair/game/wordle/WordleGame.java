@@ -67,42 +67,37 @@ public class WordleGame {
     public WordleBlock[] checkAnswer(String inputKeyword) {
         String answerKeyword = getAnswerKeyword();
 
-        WordleBlock[] result = compareKeywords(inputKeyword, answerKeyword);
-
-        return result;
+        return compareKeywords(inputKeyword, answerKeyword);
     }
 
     private WordleBlock[] compareKeywords(String inputKeyword, String answerKeyword) {
-        WordleBlock[] result = new WordleBlock[5];
+        WordleBlock[] resultBlocks = new WordleBlock[KEYWORD_LENGTH];
 
-        Set<Character> inputKeywordLetters = inputKeyword.chars()
-            .mapToObj(c -> (char)c)
+        Set<Character> inputLetters = inputKeyword.chars()
+            .mapToObj(letter -> (char)letter)
             .collect(Collectors.toCollection(HashSet::new));
 
         for (int index = 0; index < inputKeyword.length(); index++) {
-            char inputKeywordLetter = inputKeyword.charAt(index);
-            char answerKeywordLetter = answerKeyword.charAt(index);
+            char inputLetter = inputKeyword.charAt(index);
+            char answerLetter = answerKeyword.charAt(index);
 
-            WordleBlock block = compareLetters(inputKeywordLetter, answerKeywordLetter, inputKeywordLetters);
+            WordleBlock block = compareLetters(inputLetter, answerLetter, inputLetters);
 
-            result[index] = block;
+            resultBlocks[index] = block;
         }
 
-        return result;
+        return resultBlocks;
     }
 
-    private WordleBlock compareLetters(char inputKeywordLetter, char answerKeywordLetter, Set<Character> inputKeywordLetters) {
-        // 1. 두 단어가 일치하는지
-        if (answerKeywordLetter == inputKeywordLetter) {
+    private WordleBlock compareLetters(char inputLetter, char answerLetter, Set<Character> inputLetters) {
+        if (answerLetter == inputLetter) {
             return WordleBlock.CORRECT;
         }
 
-        // 2. 다른 위치에 있는 단어인지
-        if (inputKeywordLetters.contains(answerKeywordLetter)) {
+        if (inputLetters.contains(answerLetter)) {
             return WordleBlock.EXIST_BUT_WRONG_SPOT;
         }
 
-        // 3. 틀림
         return WordleBlock.WRONG;
     }
 
@@ -111,7 +106,7 @@ public class WordleGame {
 
         int index = findAnswerKeywordIndex(keywords);
 
-        // 키워드가 null이라면 논리적 예외 발생 시켜주면 좋을 듯 함
+        //TODO: 키워드가 null이라면 논리적 예외 발생 시켜주면 좋을 듯 함
         return keywords.get(index);
     }
 
