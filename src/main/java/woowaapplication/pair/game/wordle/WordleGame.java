@@ -50,7 +50,6 @@ public class WordleGame {
     }
 
     private Scanner ready() {
-        // 인트로 출력
         Scanner sc = new Scanner(System.in);
         WordleGameUI.printReady();
 
