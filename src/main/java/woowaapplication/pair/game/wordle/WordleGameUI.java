@@ -11,12 +11,12 @@ public class WordleGameUI {
     }
 
 
-    public void printResult(List<String[]> 게임_결과) {
+    public void printResult(List<String[]> gameResult) {
         if (wordleGameStorage.isClear()) {
             System.out.println(wordleGameStorage.getRestChance() + "/" + WordleGame.TOTAL_CHANCE);
         }
 
-        게임_결과.stream()
+        gameResult.stream()
                 .map(array -> String.join(" ", array))
                 .forEach(System.out::println);
     }

@@ -44,9 +44,9 @@ public class WordleGame {
         String inputKeyword = sc.nextLine();
 
         KeywordValidator.validate(inputKeyword, KEYWORD_LENGTH);
-        List<String[]> 게임_결과 = wordleGameService.playRound(inputKeyword);
+        List<String[]> gameResult = wordleGameService.playRound(inputKeyword);
 
-        wordleGameUI.printResult(게임_결과);
+        wordleGameUI.printResult(gameResult);
     }
 
     private Scanner ready() {
