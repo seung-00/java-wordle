@@ -24,7 +24,7 @@ public class WordleGameStorage {
     }
 
     public boolean isClear() {
-        return this.isClear;
+        return isClear;
     }
 
     public void checkAnswer(WordleBlock[] wordleBlocks) {

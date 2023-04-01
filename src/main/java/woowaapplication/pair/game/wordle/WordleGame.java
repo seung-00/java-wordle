@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import woowaapplication.pair.game.wordle.exception.InvalidAnswerKeywordException;
 import woowaapplication.pair.game.wordle.exception.InvalidInputKeywordException;
+import woowaapplication.pair.game.wordle.exception.OutOfChanceException;
 import woowaapplication.pair.game.wordle.exception.ReadFileException;
 
 public class WordleGame {
@@ -32,6 +33,9 @@ public class WordleGame {
                 System.out.println(e.getMessage());
                 break;
             } catch (ReadFileException e) {
+                System.out.println(e.getMessage());
+                break;
+            } catch (OutOfChanceException e) {
                 System.out.println(e.getMessage());
                 break;
             }

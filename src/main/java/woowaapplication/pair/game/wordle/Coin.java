@@ -1,5 +1,7 @@
 package woowaapplication.pair.game.wordle;
 
+import woowaapplication.pair.game.wordle.exception.OutOfChanceException;
+
 public class Coin {
 
     private int restChance;
@@ -10,7 +12,7 @@ public class Coin {
 
     public void decreaseChance() {
         if (restChance < 1) {
-            // Exception
+            throw new OutOfChanceException();
         }
 
         restChance -= 1;
