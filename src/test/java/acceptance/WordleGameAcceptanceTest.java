@@ -29,7 +29,7 @@ public class WordleGameAcceptanceTest {
     void setUp() {
         코인 = Coin.of(WordleGame.TOTAL_CHANCE);
         WordleGameStorage wordleGameStorage = WordleGameStorage.of(코인);
-        워들_게임 = new WordleGameService(wordleGameStorage, 비교_날짜);
+        워들_게임 = WordleGameService.of(wordleGameStorage, 비교_날짜);
     }
 
 

@@ -64,4 +64,12 @@ public class WordleGameService {
 
         return (period.getDays() % keywords.size()) - 1;
     }
+
+    public static WordleGameService of(WordleGameStorage wordleGameStorage) {
+        return new WordleGameService(wordleGameStorage);
+    }
+
+    public static WordleGameService of(WordleGameStorage wordleGameStorage, LocalDate comparisonDate) {
+        return new WordleGameService(wordleGameStorage, comparisonDate);
+    }
 }
