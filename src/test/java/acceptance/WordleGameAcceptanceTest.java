@@ -27,7 +27,7 @@ public class WordleGameAcceptanceTest {
 
     @BeforeEach
     void setUp() {
-        코인 = new Coin(WordleGame.TOTAL_CHANCE);
+        코인 = Coin.of(WordleGame.TOTAL_CHANCE);
         WordleGameStorage wordleGameStorage = new WordleGameStorage(코인);
         워들_게임 = new WordleGameService(wordleGameStorage, 비교_날짜);
     }

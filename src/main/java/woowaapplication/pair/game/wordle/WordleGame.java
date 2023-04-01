@@ -14,7 +14,7 @@ public class WordleGame {
     private final WordleGameUI wordleGameUI;
 
     public WordleGame() {
-        Coin coin = new Coin(TOTAL_CHANCE);
+        Coin coin = Coin.of(TOTAL_CHANCE);
         WordleGameStorage wordleGameStorage = new WordleGameStorage(coin);
         this.wordleGameUI = new WordleGameUI(wordleGameStorage);
         this.wordleGameService = new WordleGameService(wordleGameStorage);

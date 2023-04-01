@@ -23,4 +23,8 @@ public class Coin {
     public boolean isGameOver() {
         return restChance < 1;
     }
+
+    public static Coin of(int restChance) {
+        return new Coin(restChance);
+    }
 }

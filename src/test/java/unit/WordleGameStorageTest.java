@@ -22,7 +22,7 @@ class WordleGameStorageTest {
 
     @BeforeEach
     void setUp() {
-        Coin coin = new Coin(WordleGame.TOTAL_CHANCE);
+        Coin coin = Coin.of(WordleGame.TOTAL_CHANCE);
         this.wordleGameStorage = new WordleGameStorage(coin);
     }
 
