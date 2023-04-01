@@ -20,7 +20,7 @@ public class Coin {
         return restChance;
     }
 
-    public boolean isGameOver() {
+    public boolean isOutOfChance() {
         return restChance < 1;
     }
 

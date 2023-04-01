@@ -20,7 +20,7 @@ public class WordleGameStorage {
     }
 
     public boolean isGameOver() {
-        return coin.isGameOver();
+        return coin.isOutOfChance();
     }
 
     public boolean isClear() {
