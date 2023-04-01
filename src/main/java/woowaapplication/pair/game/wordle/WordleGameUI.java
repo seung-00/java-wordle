@@ -20,4 +20,8 @@ public class WordleGameUI {
                 .map(array -> String.join(" ", array))
                 .forEach(System.out::println);
     }
+
+    public static WordleGameUI of(WordleGameStorage wordleGameStorage) {
+        return new WordleGameUI(wordleGameStorage);
+    }
 }
