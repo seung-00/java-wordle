@@ -45,4 +45,8 @@ public class WordleGameStorage {
                 .map(WordleBlock::toEmojiList)
                 .collect(Collectors.toList());
     }
+
+    public static WordleGameStorage of(Coin coin) {
+        return new WordleGameStorage(coin);
+    }
 }
