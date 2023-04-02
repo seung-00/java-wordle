@@ -27,8 +27,8 @@ class KeywordValidatorTest {
 			@Test
 			@DisplayName("시도가 무효된다")
 			void it_makes_chance_canceled() {
-				assertThatThrownBy(() -> KeywordValidator.validate(알파벳이_아닌_키워드, LENGTH_LIMIT))
-					.isInstanceOf(InvalidInputKeywordException.class);
+				assertThatThrownBy(() -> KeywordValidator.validate(알파벳이_아닌_키워드, LENGTH_LIMIT)).isInstanceOf(
+					InvalidInputKeywordException.class);
 			}
 		}
 
@@ -41,8 +41,8 @@ class KeywordValidatorTest {
 			@Test
 			@DisplayName("시도가 무효된다")
 			void it_makes_chance_canceled() {
-                assertThatThrownBy(() -> KeywordValidator.validate(글자수_제한에_맞지_않는_키워드, LENGTH_LIMIT))
-                    .isInstanceOf(InvalidInputKeywordException.class);
+				assertThatThrownBy(() -> KeywordValidator.validate(글자수_제한에_맞지_않는_키워드, LENGTH_LIMIT)).isInstanceOf(
+					InvalidInputKeywordException.class);
 			}
 		}
 	}
